@@ -1,0 +1,139 @@
+import java.io.*;
+
+class Invoice {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    String part_num;
+    String part_des;
+    int no_of_items;
+    double price_of_items;
+    double amount;
+
+    Invoice() {
+        part_num = "100";
+        part_des = "charger";
+        no_of_items = 0;
+        price_of_items = 1000;
+    }
+
+    public String get_part_num() throws IOException {
+        System.out.println("Enter the part number:");
+        part_num = br.readLine();
+        return part_num;
+    }
+
+    public String get_part_des() throws IOException {
+        System.out.println("Enter the part description:");
+        part_des = br.readLine();
+        return part_des;
+    }
+
+    public int get_no_of_items() throws IOException {
+        System.out.println("Enter the number of items:");
+        no_of_items = Integer.parseInt(br.readLine());
+        return no_of_items;
+    }
+
+    public double get_price_of_items() throws IOException {
+        System.out.println("Enter the price of items:");
+        price_of_items = Double.parseDouble(br.readLine());
+        return price_of_items;
+    }
+
+    public String set_part_num(String num) {
+        part_num = num;
+        return part_num;
+    }
+
+    public String set_part_des(String des) {
+        part_des = des;
+        return part_des;
+    }
+
+    public int set_no_of_items(int num_items) {
+        no_of_items = num_items;
+        return no_of_items;
+    }
+
+    public double set_price_of_items(double price) {
+        price_of_items = price;
+        return price_of_items;
+    }
+
+    public double get_Invoice_Amount() {
+        amount = price_of_items * no_of_items;
+        amount = (amount > 0) ? amount : 0;
+        return amount;
+    }
+
+    public void displayInfo() {
+        System.out.println("Part number: \t\t" + part_num);
+        System.out.println("Part Description: \t" + part_des);
+        System.out.println("No. of items: \t\t" + no_of_items);
+        System.out.println("Price of items: \t" + price_of_items);
+        System.out.println("Amount: \t\t" + amount);
+        System.out.println();
+    }
+}
+
+class InvoiceTest {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        Invoice inv1 = new Invoice();
+        inv1.get_part_num();
+        inv1.get_part_des();
+        inv1.get_no_of_items();
+        inv1.get_price_of_items();
+        inv1.get_Invoice_Amount();
+        System.out.println("__________");
+        inv1.displayInfo();
+    }
+}
+
+
+
+
+
+
+
+import java.io.*;
+import java.util.Scanner;
+public class PurchaseRecorder 
+{
+    public static void main(String[] args)
+    {
+        Scanner scanner = new Scanner(System.in);
+        double totalCost = 0.0;
+        System.out.print("Enter the file name (e.g., Purchases.txt) followed by item details: ");
+        String input = scanner.nextLine();
+        String[] parts = input.split(" ");
+        if (parts.length < 4) 
+	{
+            System.out.println("Invalid input. Please enter the file name, item name, price, and quantity.");
+            scanner.close();
+            return;
+        }
+        String fileName = parts[0];
+        String itemName = parts[1];
+        double price = Double.parseDouble(parts[2]);
+        int quantity = Integer.parseInt(parts[3]);
+        double cost = price * quantity;
+        totalCost += cost;
+        try (PrintWriter writer = new PrintWriter(new FileWriter(fileName, true))) 
+	{
+            String purchaseDetails = String.format("Item: %s, Price: %.2f, Quantity: %d, Cost: %.2f%n", itemName, price, quantity, cost);
+            writer.println(purchaseDetails);
+            String totalSummary = String.format("The Total expenditure is Rs. %.0f/-", totalCost);
+            System.out.println("Purchases File created: " + totalSummary);
+            writer.println(totalSummary);
+        } 
+	catch (IOException e) 
+	{
+            System.out.println("An error occurred while writing to the file.");
+            e.printStackTrace();
+        } 
+	finally 
+	{
+            scanner.close();
+        }
+    }
+}

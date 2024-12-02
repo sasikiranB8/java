@@ -1,0 +1,91 @@
+import java.io.*;
+import java.util.*;
+class Highscore
+{
+	public static void main(String args[])
+	{
+	   try
+	   {
+		Scanner input=new Scanner(System.in);
+		System.out.println("Enter the file name: ");
+		String file=input.nextLine();
+		FileInputStream f=new FileInputStream(file);
+		int count=0;
+		while(f.read()!=-1)
+		{
+		    count++;
+		}
+		f.close();
+		Reader in=new FileReader(file);
+		char c[]=new char[count];
+		in.read(c);
+		String s=new String(c);
+		StringTokenizer sc=new StringTokenizer(s);
+		int arr[]=new int[100];
+		int i=0;
+		while(sc.hasMoreTokens())
+		{
+		    arr[i]=Integer.parseInt(sc.nextToken());
+		    i++;
+		}
+		int max=arr[0];
+		for(int j=0;j<i;j++)
+		{
+		   if(arr[j]>max)
+		         max=arr[j];
+		}
+		System.out.println("The Highest score is: "+max);
+		in.close();
+	   }
+	   catch(FileNotFoundException e)
+	   {
+		System.out.println("FileNotFoundException : File is not found");
+	   }
+	   catch(Exception e)
+	   {
+		System.out.println(e);
+	   }
+	}
+}
+
+
+
+
+import java.util.Scanner;
+
+public class MaxNumber {
+
+      static int max(int a, int b) {
+        return a > b ? a : b;
+    }
+
+       static double max(double a, double b) {
+        return a > b ? a : b;
+    }
+
+       static double max(double a, double b, double c) {
+        double max1 = max(a, b);
+        return max(max1, c);
+    }
+
+        public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter two integers (separated by space): ");
+        int int1 = scanner.nextInt();
+        int int2 = scanner.nextInt();
+        int intMax = max(int1, int2);
+        System.out.println("Max of " + int1 + " and " + int2 + ": " + intMax);
+        System.out.print("Enter two doubles (separated by space): ");
+        double double1 = scanner.nextDouble();
+        double double2 = scanner.nextDouble();
+        double doubleMax = max(double1, double2);
+        System.out.println("Max of " + double1 + " and " + double2 + ": " + doubleMax);
+        System.out.print("Enter three doubles (separated by space): ");
+	 double double4 = scanner.nextDouble();
+        double double5 = scanner.nextDouble();
+        double double3 = scanner.nextDouble();
+        double doubleMax1 = max(double4, double5, double3);
+        System.out.println("Max of " + double4 + ", " + double5 + ", and " + double3 + ": " + doubleMax1);
+        scanner.close();
+    }
+}
