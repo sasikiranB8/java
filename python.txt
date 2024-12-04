@@ -1,0 +1,328 @@
+27. Python program to compute the number of characters, words and lines in
+a file.
+words=0
+lines=0
+characters=0
+with open("r.txt",'r') as file:
+ for l in file:
+ words+=len(l.split())
+ lines+=1
+ characters+=len(l)
+print("No of words",words)
+print("No of lines",lines)
+print("No of characters",characters)
+
+26. Write Python Program to Reverse Each Word in a file.
+words=[]
+reversed_words=[]
+with open("r.txt") as file:
+ for line in file:
+ words_in_line=line.rstrip().split(" ")
+ for word in words_in_line:
+ reversed_words.append(word[::-1])
+ print(" ".join(reversed_words))
+ reversed_words.clear()
+file.close()
+25. Given a tuple of numbers, find and print the elements that appear in the
+list only once. The elements must be printed in the order in which they occur
+in the original list. Input: 4 3 5 2 5 1 3 5 Output: 4 2 1
+a=[int(s) for s in input().split()]
+for i in range(len(a)):
+ for j in range(len(a)):
+ if i!=j and a[i]==a[j]:
+ break
+ else:
+ print(a[i],end=' ')
+
+
+24. Python program to find tuples which have all elements divisible by K from
+a list of tuples Input: test_list = [(6, 24, 12), (60, 12, 6), (12, 18, 21)], K = 6
+Output: [(6, 24, 12), (60, 12, 6)]
+a=[]
+b=[]
+for i in range(int(input("enter no of tuples"))):
+ l=[int(x) for x in input().split()]
+ t=tuple(l)
+ a.append(t)
+print("list of tuples",a)
+k=int(input("enter k value"))
+for i in a:
+ if all(j%k ==0 for j in i):
+ b.append(i)
+print(b)
+
+
+23. Write a Python program to print the sum of digits in the digit of the list.
+The original list is : [12, 67, 98, 34] List Integer Summation : [3, 13, 17, 7]
+a=[int(x) for x in input().split()]
+print(a)
+res=[]
+for ele in a:
+ sum=0
+ for digit in str(ele):
+ sum+=int(digit)
+ res.append(sum)
+print(res)
+22. program to display and Count the Number of matching characters in a
+pair of strings
+Input : str1 = 'abcdef'
+str2 = 'defghia'
+Output : 4 (i.e. matching characters :- a, d, e, f)
+a=input()
+b=input()
+c=0
+for i in a:
+ for j in b:
+ if i==j:
+ print(i ,end=' ')
+ c+=1
+print("count",c)
+21. Write a function capitalize (lower_case_word) that takes the lower case
+words and returns the word with the first letter capitalized. Eg.,
+print(capitalize('word')) should print the word Word , don’t use built-in
+functions.
+s=input()
+a=s.split()
+for i in a:
+ i=chr(ord(i[0])-32)+i[1:len(i)]
+ print(i,end=" ")
+20. Construct a Python script to compute the following series. Cosx= 1- x2/2!
++ x4/4! – x6/6!+x8/8!-…………
+import math
+def cos_series(x,terms=10):
+ sign=-1
+ result=1
+ for i in range(1,terms):
+ power=2*i
+ factorial=math.factorial(power)
+ result+=sign*(x**power)/factorial
+ sign*=-1
+ return result
+x=float(input("enter value"))
+print("cosine value=",cos_series(x))
+
+19. Write a Program to display all prime numbers within an interval.
+start=int(input())
+end=int(input())
+for n in range(start,end+1,1):
+ if n<2:
+ continue
+ count=0
+ for i in range(1,n+1):
+ if n%i==0:
+ count+=1
+ if(count==2):
+ print(i)
+
+18. Write a program to sort words in a file and put them in another file. The
+output file should have only lower-case words, so any upper-case words from
+source must be lowered.
+f1=open("r.txt","r")
+f2=open("w.txt","w+")
+words_list=[]
+for line in f1:
+ words=line.rstrip().split()
+ for word in words:
+ words_list.append(word.lower() + ' ')
+words_list.sort
+f1.close()
+f2.writelines(words_list)
+f2.seek(0,0)
+for line in f2:
+ print(line)
+f2.close()
+
+17. Write a program to count the number of vowels in a string (No control
+flow allowed).
+# Input string from user
+st = input("Enter a string: ")
+# Count vowels using list comprehension and sum()
+vowel_count = sum(1 for char in st if char in "aeiouAEIOU")
+# Output the result
+print("Number of vowels:", vowel_count)
+
+ 16. You are given a dictionary consisting of word pairs. Every word is a
+synonym the other word in its pair. All the words in the dictionary are
+different. After the dictionary there's one more word given. Find a synonym
+for him.
+Input: 3
+Hello Hi
+Bye Goodbye
+List Array
+Goodbye
+Output: Bye
+n=int(input())
+d={}
+for i in range(n):
+ first,second=input().split()
+ d[first]=second
+print(d)
+word=input()
+if word in d:
+ print(d[word])
+else:
+ print("word not found")
+
+15. Given a list of numbers, find and print all the elements that are greater
+than the previous element. Input: 1 5 2 4 3 Output: 5 4
+a=[int(s) for s in input().split()]
+for i in range(1,len(a)):
+ if a[i]>a[i-1]:
+ print(a[i],end=' ')
+
+14. Write program to display and count number of vowels using tuple in
+given string.
+st=input("enter string")
+vowels=tuple("aeiouAEIOU")
+count=sum(1 for char in st if char in vowels)
+print(count)
+
+13. Write a user-defined function to check the given string is palindrome or
+not, Note: without using any built-in functions and slicing operation.
+def isPalindrome(s):
+ length=0
+ for char in s:
+ length+=1
+ for i in range(0,length//2):
+ if s[i]!=s[length-i-1]:
+ return False
+ return True
+s=input("enter string\n")
+if isPalindrome(s):
+ print("palindrome")
+else:
+ print("not palindrome")
+
+12. Print the following Pattern of Letter ‘N’ using loops.
+n=int(input())
+m=int(input())
+for i in range(0,n,1):
+ for j in range(0,m,1):
+ if(j==0 or i==j or j==m-1):
+ print("*" ,end=" ")
+ else:
+ print(" " ,end=" ")
+ print()
+
+11. Write a program to find the largest element among three Numbers using
+if-else.
+a = int(input("Enter first number: "))
+b = int(input("Enter second number: "))
+c = int(input("Enter third number: "))
+if a >= b and a >= c:
+ maximum = a
+elif b >= a and b >= c:
+ maximum = b
+else:
+ maximum = c
+print("Maximum value:", maximum)
+
+10. A timestamp is three numbers: a number of hours, minutes and seconds.
+Given two timestamps, calculate how many seconds is between them. The
+moment of the first timestamp occurred before the moment of the second
+timestamp.
+h1 = int(input("Enter hours for timestamp 1: "))
+m1 = int(input("Enter minutes for timestamp 1: "))
+s1 = int(input("Enter seconds for timestamp 1: "))
+h2 = int(input("Enter hours for timestamp 2: "))
+m2 = int(input("Enter minutes for timestamp 2: "))
+s2 = int(input("Enter seconds for timestamp 2: "))
+t1 = (h1 * 3600) + (m1 * 60) + s1
+t2 = (h2 * 3600) + (m2 * 60) + s2
+print(t2 - t1)
+9. Python program to print each line of a file in reverse order.
+with open("r.txt",'r') as file:
+ for l in file:
+ print(l[::-1])
+file.close()
+8 Write a program to create tuples (name, age, address, college) for at least
+two members and concatenate the tuples and print the concatenated tuples.
+num_tuples=int(input("enter number of tuples: "))
+all_list=[]
+for i in range(num_tuples):
+ print(f"enter details for{i+1}:")
+ name=input("enter name: ")
+ age=int(input("enter age: "))
+ place=input("enter place: ")
+ college=input("enter college: ")
+ details=(name,age,place,college)
+ all_list.append(details)
+com_list=()
+for details in all_list:
+ com_list+=details
+print(com_list)
+7 Write a program to check if the substring is present in a given string or not.
+string=input("enter main string: ")
+substring=input("enter substring: ")
+if substring in string:
+ print("yes")
+else:
+ print("no")
+6 Write a recursive function to print the sum of cubes of the first 10 natural
+numbers.
+def sum_cubes(n):
+ if n==0:
+ return 0
+ else:
+ return n**3+sum_cubes(n-1)
+print("sum of cubes of 10 Nos",sum_cubes(10))
+5 Given 2 integers a, b. construct a python function that product of the two
+numbers using recursion.
+def product(a,b):
+ if b==0:
+ return 0
+ else:
+ return a+product(a,b-1)
+a=int(input("enter number: "))
+b=int(input("enter number: "))
+print("product",product(a,b))
+4. Print the following Patterns using for loop. i)
+5 4 3 2 1
+5 4 3 2
+5 4 3
+5 4
+5
+3. Construct a python program that prints all the even numbers from 1 to 50
+except 10 and 26.
+for i in range(2,51,2):
+ if i!=10 and i!=26:
+ print(i,end=" ")
+2. Write a program to swap two numbers without using a temporary
+variable, Note: using Operators *,^,~,+,-, and /.
+a=int(input())
+b=int(input())
+a=a*b
+b=a//b
+a=a//b
+print("after swapping")
+print(a)
+print(b)
+#############################
+a=a^b
+b=a^b
+a=a^b
+print("after swapping")
+print(a)
+print(b)
+#########################
+a=~a
+b=~b
+a,b=b,a
+print("after swapping")
+print(a)
+print(b)
+#######################
+a=a+b
+b=a-b
+a=a-b
+print("after swapping")
+print(a)
+print(b)
+########################
+1.Write a program to add, subtract and multiply complex numbers, Note:
+Take dynamic data and use complex function.
+a=complex(input("enter a number: "))
+b=complex(input("enter a number: "))
+print("sum:",a+b)
+print("sub:",a-b)
+print("mul:",a*b)
